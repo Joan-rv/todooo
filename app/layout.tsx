@@ -1,4 +1,10 @@
-import "./global.css";
+import "@/styles/global.css";
+import Footer from "@/components/footer"
+
+export const metadata = {
+    title: "todooo",
+    description: "A simple todooo list app",
+};
 
 export default function RootLayout({
     children,
@@ -7,8 +13,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body>
-                {children}
+            <body className="flex min-h-screen flex-col">
+                <main className="flex-1">{children}</main>
+                <Footer />
             </body>
         </html>
     );

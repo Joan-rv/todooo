@@ -14,10 +14,20 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const { title } = await request.json();
-  console.log(title);
-  const newRows =
+  if (title === undefined) {
+    return new Response(JSON.stringify({ error: "Missing title" }), {
+      status: 400,
+    });
+  }
+
+  const [newTodo] =
     await sql`INSERT INTO todos (title) VALUES (${title}) RETURNING *`;
-  const newTodo = newRows[0];
+  if (newTodo === undefined) {
+    return new Response(
+      JSON.stringify({ error: "Failed to create new todo" }),
+      { status: 500 },
+    );
+  }
 
   return new Response(JSON.stringify(newTodo), {
     status: 201,

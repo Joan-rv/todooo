@@ -1,13 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { Todo } from "@/types/todo";
 
-type TodoItemProps = {
-    title: string;
-    finished: boolean;
-}
-
-export default function TodoItem({ title, finished }: TodoItemProps) {
+export default function TodoItem({ id, title, finished }: Todo) {
     const [checked, setChecked] = useState(finished);
 
     function handleCheckbox() {

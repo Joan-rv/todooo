@@ -1,5 +1,6 @@
 import { Todo } from "@/types/todo";
 import { sql } from "@/lib/db";
+import { apiError } from "@/lib/api";
 
 export async function GET() {
   const todos = await sql<
@@ -15,18 +16,13 @@ export async function GET() {
 export async function POST(request: Request) {
   const { title } = await request.json();
   if (title === undefined) {
-    return new Response(JSON.stringify({ error: "Missing title" }), {
-      status: 400,
-    });
+    return apiError("Missing title", 400);
   }
 
   const [newTodo] =
     await sql`INSERT INTO todos (title) VALUES (${title}) RETURNING *`;
   if (newTodo === undefined) {
-    return new Response(
-      JSON.stringify({ error: "Failed to create new todo" }),
-      { status: 500 },
-    );
+    return apiError("Failed to create new todo", 500);
   }
 
   return new Response(JSON.stringify(newTodo), {

@@ -1,20 +1,17 @@
 import { sql } from "@/lib/db";
+import { apiError } from "@/lib/api";
 
 export async function GET(request: Request) {
   const id = new URL(request.url).searchParams.get("id");
   if (id === undefined) {
-    return new Response(JSON.stringify({ error: "Missing id" }), {
-      status: 400,
-    });
+    return apiError("Missing id", 400);
   }
 
   const [todoStatus] = await sql`
     select finished from todos where id=${id}
   `;
   if (todoStatus === undefined) {
-    return new Response(JSON.stringify({ error: "Id not found in DB" }), {
-      status: 404,
-    });
+    return apiError("Id not found in DB", 404);
   }
 
   return new Response(JSON.stringify(todoStatus), {
@@ -26,12 +23,7 @@ export async function POST(request: Request) {
   const { id, finished } = await request.json();
 
   if (id === undefined || finished === undefined) {
-    return new Response(
-      JSON.stringify({ error: "Missing id or new finished" }),
-      {
-        status: 400,
-      },
-    );
+    return apiError("Missing id or finished", 400);
   }
 
   const [newStatus] = await sql`
@@ -39,9 +31,7 @@ export async function POST(request: Request) {
   `;
 
   if (!newStatus) {
-    return new Response(JSON.stringify({ error: "Id not found in DB" }), {
-      status: 404,
-    });
+    return apiError("Id not found in DB", 404);
   }
 
   return new Response(JSON.stringify(newStatus), {

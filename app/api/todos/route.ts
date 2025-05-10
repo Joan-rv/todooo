@@ -1,10 +1,7 @@
 import postgres from "postgres";
 import { Todo } from "@/types/todo";
 
-const sql = postgres({
-  username: "postgres",
-  password: "pass1234",
-});
+const sql = postgres(process.env.POSTGRESURL!, {});
 
 export async function GET() {
   const todos = await sql<Todo[]>`select * from todos;`;

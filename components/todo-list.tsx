@@ -20,21 +20,19 @@ export default function TodoList() {
   }
 
   return (
-    <div className="flex-col flex flex-1 items-stretch">
-      <div className="flex mb-2">
-        <form onSubmit={handleNewTodo}>
-          <input
-            type="text"
-            value={newTodo}
-            onChange={(e) => setNewTodo(e.target.value)}
-            className="flex-1 border rounded px-1"
-            placeholder="Add a new todo item"
-          />
-          <button className="ml-2 rounded bg-blue-500 text-white px-2 hover:bg-blue-600 transition">
-            Add todo item
-          </button>
-        </form>
-      </div>
+    <div className="flex-col flex flex-1 w-full max-w-150 px-4 items-stretch">
+      <form onSubmit={handleNewTodo} className="flex pb-4">
+        <input
+          type="text"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          className="flex-1 border rounded px-1"
+          placeholder="Add a new todo item"
+        />
+        <button className="ml-2 rounded bg-blue-500 text-white px-2 hover:bg-blue-600 transition">
+          Add todo item
+        </button>
+      </form>
       {todos.length == 0 ? (
         "No todo items yet"
       ) : (

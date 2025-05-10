@@ -30,7 +30,7 @@ export default function TodoList() {
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
-      setTodos([...todos, (await response.json()) as Todo]);
+      setTodos([(await response.json()) as Todo, ...todos]);
     }
     setNewTodo("");
   }

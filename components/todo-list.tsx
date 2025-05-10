@@ -9,7 +9,7 @@ export default function TodoList() {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const response = await fetch("/api/todos");
+      const response = await fetch("/api/v1/todos");
       if (response.ok) {
         const data = (await response.json()) as Todo[];
         setTodos(data);
@@ -24,7 +24,7 @@ export default function TodoList() {
   async function handleNewTodo(e: React.FormEvent) {
     e.preventDefault();
     if (!newTodo.trim()) return;
-    const response = await fetch("/api/todos", {
+    const response = await fetch("/api/v1/todos", {
       method: "POST",
       body: JSON.stringify({ title: newTodo }),
       headers: { "Content-Type": "application/json" },

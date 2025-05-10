@@ -4,7 +4,7 @@ export default function Page() {
     return (
         <div className="flex flex-col items-center">
             <h1 className="text-3xl font-bold"> Title</h1>
-            <ul className="bg-gray-100 w-3/12 py-2 rounded-sm flex flex-col items-center">
+            <ul className="bg-gray-100 w-3/12 py-2 rounded-sm flex flex-col items-stretch">
                 <li><TodoItem title="Some task" /></li>
                 <li><TodoItem title="Some task 2" /></li>
             </ul>

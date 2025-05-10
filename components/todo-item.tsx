@@ -3,11 +3,17 @@
 import { useState } from "react";
 import { Todo } from "@/types/todo";
 
-export default function TodoItem({ title, finished }: Todo) {
+export default function TodoItem({ id, title, finished }: Todo) {
   const [checked, setChecked] = useState(finished);
 
-  function handleCheckbox() {
-    setChecked(!checked);
+  async function handleCheckbox() {
+    const response = await fetch("api/v1/todos/status", {
+      method: "POST",
+      body: JSON.stringify({ id, finished: !checked }),
+    });
+    if (response.ok) {
+      setChecked((await response.json()).finished);
+    }
   }
 
   return (

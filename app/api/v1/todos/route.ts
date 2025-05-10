@@ -2,7 +2,9 @@ import { Todo } from "@/types/todo";
 import { sql } from "@/lib/db";
 
 export async function GET() {
-  const todos = await sql<Todo[]>`select * from todos;`;
+  const todos = await sql<
+    Todo[]
+  >`select * from todos order by created_at desc;`;
 
   return new Response(JSON.stringify(todos), {
     status: 200,

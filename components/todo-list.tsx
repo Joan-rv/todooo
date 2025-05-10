@@ -7,15 +7,29 @@ export default function TodoList() {
     const [todos, setTodos] = useState([
         { id: 1, title: "Some task", finished: false },
         { id: 2, title: "Some task 2", finished: false },
-    ])
+    ]);
+
+    const [newTodo, setNewTodo] = useState("");
+
+    function handleClick() {
+        if (!newTodo.trim()) return;
+        setTodos([...todos, { id: Date.now() + Math.random(), title: newTodo, finished: false }]);
+        setNewTodo("");
+    }
 
     return (
-        <ul className="bg-gray-100 w-3/12 py-2 rounded-md flex flex-col items-stretch">
-            {todos.map((todo) => (
-                <li key={todo.id}>
-                    <TodoItem {...todo} />
-                </li>
-            ))}
-        </ul>
+        <div className="flex-col flex flex-1 w-3/12 items-stretch">
+            <div className="flex mb-2">
+                <input type="text" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} className="flex-1 border rounded" />
+                <button onClick={handleClick} className="ml-2 rounded bg-blue-500 text-white px-2 hover:bg-blue-600 transition" >Add todo item</button>
+            </div>
+            <ul className="bg-gray-100 py-2 rounded-md flex flex-col items-stretch">
+                {todos.map((todo) => (
+                    <li key={todo.id}>
+                        <TodoItem {...todo} />
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 }

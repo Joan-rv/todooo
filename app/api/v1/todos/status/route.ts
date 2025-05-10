@@ -16,6 +16,7 @@ export async function GET(request: Request) {
 
   return new Response(JSON.stringify(todoStatus), {
     status: 200,
+    headers: { "Content-Type": "application/json" },
   });
 }
 
@@ -36,5 +37,6 @@ export async function POST(request: Request) {
 
   return new Response(JSON.stringify(newStatus), {
     status: 200,
+    headers: { "Content-Type": "application/json" },
   });
 }

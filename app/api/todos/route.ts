@@ -1,0 +1,29 @@
+import postgres from "postgres";
+import { Todo } from "@/types/todo";
+
+const sql = postgres({
+  username: "postgres",
+  password: "pass1234",
+});
+
+export async function GET() {
+  const todos = await sql<Todo[]>`select * from todos;`;
+
+  return new Response(JSON.stringify(todos), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+export async function POST(request: Request) {
+  const { title } = await request.json();
+  console.log(title);
+  const newRows =
+    await sql`INSERT INTO todos (title) VALUES (${title}) RETURNING *`;
+  const newTodo = newRows[0];
+
+  return new Response(JSON.stringify(newTodo), {
+    status: 201,
+    headers: { "Content-Type": "application/json" },
+  });
+}

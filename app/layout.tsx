@@ -1,22 +1,22 @@
 import "@/styles/global.css";
-import Footer from "@/components/footer"
+import Footer from "@/components/footer";
 
 export const metadata = {
-    title: "todooo",
-    description: "A simple todooo list app",
+  title: "todooo",
+  description: "A simple todooo list app",
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en">
-            <body className="flex min-h-screen flex-col">
-                <main className="flex-1">{children}</main>
-                <Footer />
-            </body>
-        </html>
-    );
+  return (
+    <html lang="en">
+      <body className="flex min-h-screen flex-col">
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
 }

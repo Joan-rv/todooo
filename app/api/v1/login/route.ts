@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
 import { apiError } from "@/lib/api";
 import { sql } from "@/lib/db";
 import { generateToken } from "@/lib/jwt";
@@ -26,14 +27,10 @@ export async function POST(request: Request) {
   };
 
   const token = generateToken(payload, "1d");
+  (await cookies()).set("token", token, { maxAge: 60 * 60 * 24 });
 
-  return Response.json(
-    {
-      message: "Login successful",
-      user: payload,
-    },
-    {
-      headers: { "Set-Cookie": `token=${token}; Max-Age=${60 * 60 * 24}` },
-    },
-  );
+  return Response.json({
+    message: "Login successful",
+    user: payload,
+  });
 }

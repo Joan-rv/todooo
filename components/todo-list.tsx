@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import TodoItem from "./todo-item";
+import Button from "./button";
 import { Todo } from "@/types/todo";
 
 export default function TodoList() {
@@ -45,9 +46,7 @@ export default function TodoList() {
           className="flex-1 border rounded px-1"
           placeholder="Add a new todo item"
         />
-        <button className="ml-2 rounded bg-blue-500 text-white px-2 hover:bg-blue-600 transition">
-          Add todo item
-        </button>
+        <Button text="Add todo item"></Button>
       </form>
       {todos.length == 0 ? (
         "No todo items yet"

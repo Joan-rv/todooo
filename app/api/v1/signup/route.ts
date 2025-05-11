@@ -15,18 +15,12 @@ export async function POST(request: Request) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const response = await sql`
+  const newUser = await sql`
     insert into users (username, password) values (${username}, ${hashedPassword}) returning id,username
   `;
 
-  return new Response(
-    JSON.stringify({
-      message: "Signup successful",
-      user: response,
-    }),
-    {
-      status: 201,
-      headers: { "Content-Type": "application/json" },
-    },
+  return Response.json(
+    { message: "Signup successful", user: newUser },
+    { status: 201 },
   );
 }

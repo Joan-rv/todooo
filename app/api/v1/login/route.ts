@@ -19,14 +19,8 @@ export async function POST(request: Request) {
     return apiError("Invalid password", 401);
   }
 
-  return new Response(
-    JSON.stringify({
-      message: "Login successful",
-      user: { id: user.id, username: user.username },
-    }),
-    {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    },
-  );
+  return Response.json({
+    message: "Login successful",
+    user: { id: user.id, username: user.username },
+  });
 }

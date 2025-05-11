@@ -25,8 +25,5 @@ export async function POST(request: Request) {
     return apiError("Failed to create new todo", 500);
   }
 
-  return new Response(JSON.stringify(newTodo), {
-    status: 201,
-    headers: { "Content-Type": "application/json" },
-  });
+  return Response.json(newTodo, { status: 201 });
 }

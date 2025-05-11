@@ -35,8 +35,5 @@ export async function POST(request: Request) {
     return apiError("Id not found in DB", 404);
   }
 
-  return new Response(JSON.stringify(newStatus), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  return Response.json(newStatus);
 }

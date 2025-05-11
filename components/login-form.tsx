@@ -1,4 +1,5 @@
 import { FaRegUser, FaLock } from "react-icons/fa";
+import Button from "./button";
 
 export default function LoginForm() {
   return (
@@ -21,7 +22,9 @@ export default function LoginForm() {
             className="border rounded ml-0 m-2 px-1"
           ></input>
         </label>
-        <button className="rounded border">Login</button>
+        <div className="mb-1">
+          <Button text="Login"></Button>
+        </div>
       </form>
     </div>
   );

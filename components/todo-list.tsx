@@ -43,7 +43,7 @@ export default function TodoList() {
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          className="flex-1 border rounded px-1"
+          className="flex-1 border rounded px-1 mr-2"
           placeholder="Add a new todo item"
         />
         <Button text="Add todo item"></Button>
@@ -51,7 +51,7 @@ export default function TodoList() {
       {todos.length == 0 ? (
         "No todo items yet"
       ) : (
-        <ul className="bg-gray-100 py-2 rounded-md flex flex-col items-stretch">
+        <ul className="bg-gray-100 rounded-md flex flex-col items-stretch">
           {todos.map((todo) => (
             <li key={todo.id}>
               <TodoItem {...todo} />

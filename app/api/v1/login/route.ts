@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { apiError } from "@/lib/api";
 import { sql } from "@/lib/db";
+import { generateToken } from "@/lib/jwt";
 
 export async function POST(request: Request) {
   const { username, password } = await request.json();
@@ -19,8 +20,20 @@ export async function POST(request: Request) {
     return apiError("Invalid password", 401);
   }
 
-  return Response.json({
-    message: "Login successful",
-    user: { id: user.id, username: user.username },
-  });
+  const payload = {
+    id: user.id,
+    username: user.username,
+  };
+
+  const token = generateToken(payload, "1d");
+
+  return Response.json(
+    {
+      message: "Login successful",
+      user: payload,
+    },
+    {
+      headers: { "Set-Cookie": `token=${token}; Max-Age=${60 * 60 * 24}` },
+    },
+  );
 }

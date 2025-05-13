@@ -29,6 +29,12 @@ export default function Header() {
         >
           Login
         </Link>
+        <Link
+          href="/signup"
+          className="bg-sky-500 hover:bg-sky-600 transition text-white p-2 m-2 rounded"
+        >
+          Signup
+        </Link>
         <button
           onClick={handleLogoff}
           className="bg-sky-500 hover:bg-sky-600 transition text-white p-2 m-2 rounded"
